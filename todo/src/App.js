@@ -1,5 +1,9 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+
+// Context
+import { TodoContext } from './contexts/TodoContext'
 
 // Components
 import TodoList from './components/TodoList'
@@ -14,11 +18,13 @@ import TodoForm from './components/TodoForm'
 
 function App() {
   return (
+    <TodoContext.Provider>
     <div className="App">
       <h1>Reducer Todo List</h1>
       <TodoForm />
       <TodoList />
     </div>
+    </TodoContext.Provider>
   );
 }
 

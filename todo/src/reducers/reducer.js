@@ -12,3 +12,16 @@
 // ```
 
 // - Export both the reducer and the initial state object
+
+export const initialState = {
+    item: 'Learn about reducers',
+    completed: false,
+    id: 3892987589
+  }
+
+export function reducer(){
+    switch(action.type) {
+        default: 
+            return state;
+    }
+}
