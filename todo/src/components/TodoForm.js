@@ -1,25 +1,45 @@
-import React from 'react'
 
-// ### STEP 3 - Adding todos
+import React, { useState, useContext } from 'react';
+import { TaskContext } from '../contexts/task'
+// ### STEP 5 - Clearing completed todos
+
+// - Build a function that will dispatch an action to filter out any completed todos
+// - Invoke this new function when you click on a "Clear completed" button
+// - Write the `case` in your reducer for filtering completed todos
 
 // - Build a form to add todos to your list
-// - Build a function that will dispatch an action to add a new todo
-// - Write the `case` in your reducer for adding a todo (You can create a unique id with `new Date()`)
+const TodoForm = () => {
+    const { addTask, clearCompleted } = useContext(TaskContext)
+    const [formValue, setFormValue] = useState("")
+    
+    // - Build a function that will dispatch an action to add a new todo
+    const handleSubmit = e => {
+        e.preventDefault()
+        addTask(formValue)
+        setFormValue("");
+    }
+    
+    const handleChange = e => {
+        setFormValue(e.target.value)
+    }
 
-// ### STEP 4 - Toggle the completed field
+    const handleClear = e => {
+        e.preventDefault()
+        clearCompleted()
+    }
 
-// - Build a function that will dispatch an action to toggle a todo's completed field
-// - Invoke this new function when you click on a todo
-// - Style your todo to somehow show that it is completed (be creative here!)
-// - Write the `case` in your reducer for toggling the completed property
-
-function TodoForm() {
     return (
         <div>
-            <form>
-                <input type="text" placeholder="Add Todo" />
-                <button>Add</button>
-                <button>Delete</button> 
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text" 
+                    name="task"
+                    placeholder="Add a new task"
+                    value={formValue} 
+                    onChange={handleChange}
+                />
+                <button type="submit">Add</button>
+                <button onClick={handleClear}>Clear Completed</button>
             </form>          
         </div>
     )

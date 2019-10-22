@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TaskContext } from '../contexts/task'
 
-// Components
-import Todo from './Todo'
+const TodoList = ({ tasks }) => {
+    const { toggleCompleted } = useContext(TaskContext);
 
-function TodoList() {
     return (
         <div>
-            <Todo />
+            {tasks.map(task => (
+                <div key={task.id}
+                    onClick={() => toggleCompleted(task.id)}
+                    className={task.completed ? "completed" : ""}>
+                    <li>{task.item}</li>
+                </div>
+            ))}
         </div>
     )
 }
 
-export default TodoList
+export default TodoList;
